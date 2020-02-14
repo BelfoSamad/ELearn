@@ -8,10 +8,19 @@ use Illuminate\Support\Str;
 use \App;
 
 class CoursesController extends Controller{
-    /**
-     * Get Courses List
-     */
+
+    public function get_category_courses($category){
+        return $category;
+    }
+
     public function get_courses(){
+        return 'Courses';
+    }
+
+    /**
+     * Get My Courses List
+     */
+    public function get_my_courses(){
         //Gettin the Courses of the User Logged In
         $user = auth()->user();
         if ($user->type == 'Teacher'){
@@ -19,7 +28,7 @@ class CoursesController extends Controller{
         }else{
             $courses = auth()->user()->my_courses()->get();
         }
-        return view('test.my_courses', ['courses', $courses]);
+        return view('courses.courses', ['courses', $courses]);
     }
 
     /**
@@ -27,7 +36,7 @@ class CoursesController extends Controller{
      */
     public function get_course($slug){
         $course = App\Course::where('slug', $slug)->get();
-        return view('test.course', ['course', $courses]);
+        return view('courses.course', ['course', $course]);
     }
 
     /**
@@ -49,18 +58,23 @@ class CoursesController extends Controller{
      * View Course
      */
     public function view_course($slug, $subchapter_id = null){
+        /*
         $course = App\Course::where('slug', $slug)->get();
-        $constructor = App\User::find($course[0]->user_id);
+        $constructor = App\User::find($course->first()->user_id);
         if ($subchapter_id != null){
             $subchapter = App\SubChapter::find($subchapter_id);
         }else {
-            $subchapter = $course[0]->chapters()->get()[0]->sub_chapters()->get()[0];
+            $subchapter = $course->first()->chapters()->get()->first()->sub_chapters()->get()->first();
         }
         $comments = $subchapter->comments()->get();
-        return view('test.view', ['course' => $course[0],
+        */
+        return view('courses.view-course'
+        /*
+        ,['course' => $course[0],
             'subchapter' => $subchapter,
             'constructor' => $constructor, 
-            'comments' => $comments]);
+            'comments' => $comments]*/
+        );
     }
 
     /**
