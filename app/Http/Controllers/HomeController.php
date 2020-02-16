@@ -25,6 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = App\Category::all();
-        return view('index', ['categories' => $categories]);
+        $courses = App\Course::all();
+        return view('index', ['categories' => $categories, 'courses' => $courses]);
     }
 }

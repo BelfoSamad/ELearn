@@ -10,11 +10,13 @@ use \App;
 class CoursesController extends Controller{
 
     public function get_category_courses($category){
-        return $category;
+        $courses = App\Category::where('name', $category)->get()->first()->courses()->get();
+        return view('courses.courses', ['courses' => $courses]);
     }
 
     public function get_courses(){
-        return 'Courses';
+        $courses = App\Course::all();
+        return view('courses.courses', ['courses' => $courses]);
     }
 
     /**
@@ -35,8 +37,8 @@ class CoursesController extends Controller{
      * Get Course Infos
      */
     public function get_course($slug){
-        $course = App\Course::where('slug', $slug)->get();
-        return view('courses.course', ['course', $course]);
+        $course = App\Course::where('slug', $slug)->get()->first();
+        return view('courses.course', ['course' => $course]);
     }
 
     /**
@@ -58,22 +60,19 @@ class CoursesController extends Controller{
      * View Course
      */
     public function view_course($slug, $subchapter_id = null){
-        /*
-        $course = App\Course::where('slug', $slug)->get();
-        $constructor = App\User::find($course->first()->user_id);
+        $course = App\Course::where('slug', $slug)->get()->first();
+        $constructor = App\User::find($course->user_id);
         if ($subchapter_id != null){
             $subchapter = App\SubChapter::find($subchapter_id);
         }else {
-            $subchapter = $course->first()->chapters()->get()->first()->sub_chapters()->get()->first();
+            $subchapter = $course->chapters()->get()->first()->sub_chapters()->get()->first();
         }
         $comments = $subchapter->comments()->get();
-        */
         return view('courses.view-course'
-        /*
-        ,['course' => $course[0],
+        ,['course' => $course,
             'subchapter' => $subchapter,
             'constructor' => $constructor, 
-            'comments' => $comments]*/
+            'comments' => $comments]
         );
     }
 
@@ -97,6 +96,8 @@ class CoursesController extends Controller{
             $course_title = $request->input('course_title');
             $course->title = $course_title;
             $course->description = $request->input('description');
+            $course->category_id = App\Category::where('name', $request->input('category'))->get()->first()->id;
+            $course->duration = $request->input('course_duration');
             //Make Slug
             $course->slug = Str::slug($course_title, '-');
             //Add Constructor
@@ -131,10 +132,12 @@ class CoursesController extends Controller{
 
             //Save Chapter Resources
             $chapter_res = $request->file('res_'.$chapters_count);
-            $res_name = $course->slug.'_chapter_'.$chapter->id.'.'.$chapter_res->getClientOriginalExtension();
-            Storage::disk('content')->putFileAs('resources', $chapter_res, $res_name);
-            App\Chapter::find($chapter->id)
-                    ->update(['resource' => $res_name]);
+            if($chapter_res != null){
+                $res_name = $course->slug.'_chapter_'.$chapter->id.'.'.$chapter_res->getClientOriginalExtension();
+                Storage::disk('content')->putFileAs('resources', $chapter_res, $res_name);
+                App\Chapter::find($chapter->id)
+                        ->update(['resource' => $res_name]);
+            }
 
             $subchapters_count = 1;
             while($request->has('sc_title_'.$chapters_count.$subchapters_count)){

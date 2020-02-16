@@ -17,146 +17,26 @@
 			<h2>Popular Courses</h2>
 		</div>
 		<div id="reccomended" class="owl-carousel owl-theme">
-			<!-- /item -->
+			@foreach ($courses as $course)
 			<div class="item">
 				<div class="box_grid">
 					<figure>
-						<a href="course-detail.html">
+						<a href="/course/{{$course->slug}}/view">
 							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
+								src="{{ storage_path('content\covers\\'.$course->cover) }}" class="img-fluid" alt="">
 						</a>
 					</figure>
 					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
+						<h3>{{$course->title}}</h3>
+						<p>{{$course->description}}</p>
 					</div>
 					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
+						<li><i class="icon_clock_alt"></i> {{$course->duration}} min</li>
+						<li><a href="/course/{{$course->slug}}/enroll">Enroll now</a></li>
 					</ul>
 				</div>
 			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
-			<!-- /item -->
-			<div class="item">
-				<div class="box_grid">
-					<figure>
-						<a href="course-detail.html">
-							<div class="preview"><span>Preview course</span></div><img
-								src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg" class="img-fluid"
-								alt="">
-						</a>
-					</figure>
-					<div class="wrapper">
-						<h3>Persius delenit has cu</h3>
-						<p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cu.</p>
-					</div>
-					<ul>
-						<li><i class="icon_clock_alt"></i> 1h 30min</li>
-						<li><a href="course-detail.html">Enroll now</a></li>
-					</ul>
-				</div>
-			</div>
+			@endforeach
 		</div>
 		<!-- /carousel -->
 		<div class="container">
