@@ -1,73 +1,74 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Udema a modern educational site template">
+	<meta name="author" content="Ansonika">
+	<title>ELearn</title>
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+	<!-- BASE CSS -->
+	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
+	<link href="{{asset('css/style.css')}}" rel="stylesheet">
+	<link href="{{asset('css/vendors.css')}}" rel="stylesheet">
+	<link href="{{asset('css/icon_fonts/css/all_icons.min.css')}}" rel="stylesheet">
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+	<!-- YOUR CUSTOM CSS -->
+	<link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+</head>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+<body id="login_bg">
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+	<nav id="menu" class="fake_menu"></nav>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+	<div id="preloader">
+		<div data-loader="circle-side"></div>
+	</div>
+	<!-- End Preload -->
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+	<div id="login">
+		<aside>
+			<form method="POST" action="{{ route('login') }}">
+				@csrf
+				<div class="form-group">
+					<span class="input">
+						<input id="email" type="email"
+							class="input_field form-control @error('email') is-invalid @enderror" name="email"
+							value="{{ old('email') }}" required autocomplete="email" autofocus>
+						<label class="input_label">
+							<span class="input__label-content">Your email</span>
+						</label>
+					</span>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+					<span class="input">
+						<input id="password" type="password"
+							class="input_field form-control @error('password') is-invalid @enderror" name="password"
+							required autocomplete="current-password">
+						<label class="input_label">
+							<span class="input__label-content">Your password</span>
+						</label>
+					</span>
+				</div>
+				<button type="submit" class="btn btn-primary">
+					{{ __('Login') }}
+				</button>
+				<div class="text-center add_top_10">New to ELearn? <strong><a href="register.html">Sign up!</a></strong>
+				</div>
+			</form>
+			<div class="copy">© 2020 ELearn</div>
+		</aside>
+	</div>
+	<!-- /login -->
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+	<!-- COMMON SCRIPTS -->
+	<script src="{{asset('js/jquery-2.2.4.min.js')}}"></script>
+	<script src="{{asset('js/common_scripts.js')}}"></script>
+	<script src="{{asset('js/main.js')}}"></script>
+	<script src="{{asset('assets/validate.js')}}"></script>
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+</body>
 
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+</html>

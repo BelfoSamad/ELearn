@@ -18,12 +18,14 @@
 		</div>
 		<div id="reccomended" class="owl-carousel owl-theme">
 			@foreach ($courses as $course)
+			@auth
+			@if (!$course->enrolled_students->contains(Auth::user()))
 			<div class="item">
 				<div class="box_grid">
 					<figure>
-						<a href="/course/{{$course->slug}}/view">
+						<a href="/course/{{$course->slug}}">
 							<div class="preview"><span>Preview course</span></div><img
-								src="{{ storage_path('content\covers\\'.$course->cover) }}" class="img-fluid" alt="">
+								src="{{ Storage::url('content/covers/'.$course->cover)}}" class="img-fluid" alt="">
 						</a>
 					</figure>
 					<div class="wrapper">
@@ -31,11 +33,55 @@
 						<p>{{$course->description}}</p>
 					</div>
 					<ul>
-						<li><i class="icon_clock_alt"></i> {{$course->duration}} min</li>
+						<li><i class="icon_clock_alt"></i>
+							{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
 						<li><a href="/course/{{$course->slug}}/enroll">Enroll now</a></li>
 					</ul>
 				</div>
 			</div>
+			@else
+			<div class="item">
+				<div class="box_grid">
+					<figure>
+						<a href="/course/{{$course->slug}}">
+							<div class="preview"><span>Preview course</span></div><img
+								src="{{ Storage::url('content/covers/'.$course->cover)}}" class="img-fluid" alt="">
+						</a>
+					</figure>
+					<div class="wrapper">
+						<h3>{{$course->title}}</h3>
+						<p>{{$course->description}}</p>
+					</div>
+					<ul>
+						<li><i class="icon_clock_alt"></i>
+							{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
+						<li><a href="/course/{{$course->slug}}">Enrolled</a></li>
+					</ul>
+				</div>
+			</div>
+			@endif
+			@endauth
+			@guest
+			<div class="item">
+				<div class="box_grid">
+					<figure>
+						<a href="/course/{{$course->slug}}">
+							<div class="preview"><span>Preview course</span></div><img
+								src="{{ Storage::url('content/covers/'.$course->cover)}}" class="img-fluid" alt="">
+						</a>
+					</figure>
+					<div class="wrapper">
+						<h3>{{$course->title}}</h3>
+						<p>{{$course->description}}</p>
+					</div>
+					<ul>
+						<li><i class="icon_clock_alt"></i>
+							{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
+						<li><a href="/course/{{$course->slug}}/enroll">Enroll now</a></li>
+					</ul>
+				</div>
+			</div>
+			@endguest
 			@endforeach
 		</div>
 		<!-- /carousel -->

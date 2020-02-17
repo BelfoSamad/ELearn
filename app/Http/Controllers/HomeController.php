@@ -14,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $categories = App\Category::all();
-        $courses = App\Course::all();
+        $courses = App\Course::all()->take(6);
         return view('index', ['categories' => $categories, 'courses' => $courses]);
     }
 }

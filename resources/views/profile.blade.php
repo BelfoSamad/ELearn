@@ -21,7 +21,9 @@
 						<li>Gender <span class="float-right">{{Auth::user()->gender}}</span></li>
 						<li>Birthdate <span class="float-right">{{Auth::user()->birthdate}}</span></li>
 						<li>My Courses <span class="float-right">{{$courses->count()}}</span></li>
+						@if (auth()->user()->type == 'Teacher')
 						<li><a href="/course/add">Add Course</a></li>
+						@endif
 					</ul>
 				</div>
 			</aside>

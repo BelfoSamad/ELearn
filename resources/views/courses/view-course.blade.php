@@ -40,8 +40,15 @@
 							<div class="card-body">
 								<div class="list_lessons">
 									<ul>
+										@if ($chapter->resource != null)
+										<li>Resources<span><a href="/download/{{$chapter->resource}}"><i
+														class="icon_download"></i> ZIP</a></span>
+										</li>
+										@endif
 										@foreach ($chapter->sub_chapters()->get() as $subchapter)
-										<li>{{$subchapter->title}}<span>00:59</span></li>
+										<li class="get_video"
+											src="{{ Storage::url('content/videos/'.$subchapter->video)}}">
+											{{$subchapter->title}}</li>
 										@endforeach
 									</ul>
 								</div>
@@ -52,7 +59,8 @@
 				</div>
 			</aside>
 			<div class="course-content">
-				<video src="{{asset('video/intro.mp4')}}" controls></video>
+				<video id="course_content" src="{{ Storage::url('content/videos/'.$subchapter->video)}}"
+					controls></video>
 				<div class="course-details">
 					<ul class="nav nav-tabs" id="myTab" role="tablist">
 						<li class="nav-item">
@@ -157,6 +165,13 @@
 	<!-- SPECIFIC SCRIPTS -->
 	<script src="{{asset('js/jquery.cookiebar.js')}}"></script>
 	<script src="{{asset('jquery-3.4.1.min.js')}}"></script>
+
+	<script>
+		$(".get_video").on("click", function(){
+			$(this).style = "color: yellow";
+			document.getElementById("course_content").src = $(this).attr("src");
+        });
+	</script>
 
 </body>
 

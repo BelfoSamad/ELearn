@@ -11,25 +11,27 @@
     <!--/hero_in-->
     <div class="container margin_120_95">
         <div class="col-lg-12">
-            <h4>Send a message</h4>
-            <p>Ex quem dicta delicata usu, zril vocibus maiestatis in qui.</p>
+            <h4>Add Course</h4>
+            <p>Make sure to fill all Informations before adding the course</p>
             <form action="/course/add/new" method="post" enctype="multipart/form-data">
                 @csrf
                 <fieldset name="Add Course">
                     <div class="col-md-6">
                         <span class="input">
-                            <input class="input_field" type="text" name="course_title" placeholder="Course Title" />
+                            <input class="input_field" type="text" name="course_title" placeholder="Course Title"
+                                required />
                             <label class="input_label"></label>
                         </span>
                     </div>
                     <div class="col-md-6">
                         <span class="input">
-                            <input class="input_field" type="number" name="course_duration" placeholder="100 Min" />
+                            <input class="input_field" type="number" name="course_duration" placeholder="100 Min"
+                                required />
                             <label class="input_label"></label>
                         </span>
                     </div>
                     <div class="col-md-6">
-                        <select class="required" name="category" id="category">
+                        <select class="required" name="category" id="category" required>
                             <option value="" selected="">Select a Category</option>
                             <option value="Business">Business</option>
                             <option value="IT">IT</option>
@@ -42,12 +44,13 @@
                     <div class="col-md-6">
                         <span class="input">
                             <textarea class="input_field" name="description" style="height:150px;"
-                                placeholder="Course Description"></textarea>
+                                placeholder="Course Description" required></textarea>
                             <label class="input_label"></label>
                         </span>
                     </div>
                     <label class="file">
-                        <input type="file" id="file" aria-label="File browser example" name="cover" accept="image/*">
+                        <input type="file" id="file" aria-label="File browser example" name="cover" accept="image/*"
+                            required>
                         <span class="file-custom"></span>
                     </label>
                     <fieldset name="Add Chapters">
@@ -62,6 +65,3 @@
     </div>
 </main>
 @endsection
-@if(Session::has('error_msg'))
-{{Session::get('error_msg')}}
-@endif

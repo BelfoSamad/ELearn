@@ -34,7 +34,7 @@
 							<h2>Chapters</h2>
 							<ul>
 								<li>{{$course->chapters()->count()}} Chapters</li>
-								<li>{{$course->duration}} Min</li>
+								<li>{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
 							</ul>
 						</div>
 						<div id="accordion_lessons" role="tablist" class="add_bottom_45">
@@ -54,7 +54,7 @@
 										<div class="list_lessons">
 											<ul>
 												@foreach ($chapter->sub_chapters()->get() as $subchapter)
-												<li>{{$subchapter->title}}<span>00:59</span></li>
+												<li>{{$subchapter->title}}</li>
 												@endforeach
 											</ul>
 										</div>
@@ -71,11 +71,17 @@
 
 				<aside class="col-lg-4" id="sidebar">
 					<div class="box_detail">
+						@auth
 						@if (auth()->user()->my_courses->contains($course))
-						<a href="./{{$course->slug}}/view" class="btn_1 full-width">View</a>
+						<a href="/course/{{$course->slug}}/view" class="btn_1 full-width">View</a>
+						<a href="/course/{{$course->slug}}/unenroll" class="btn_1 full-width">UnEnroll</a>
 						@else
-						<a href="./{{$course->slug}}/enroll" class="btn_1 full-width">Enroll</a>
+						<a href="/course/{{$course->slug}}/enroll" class="btn_1 full-width">Enroll</a>
 						@endif
+						@endauth
+						@guest
+						<a href="/course/{{$course->slug}}/enroll" class="btn_1 full-width">Enroll</a>
+						@endguest
 					</div>
 				</aside>
 			</div>

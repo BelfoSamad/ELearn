@@ -11,12 +11,12 @@ class CoursesController extends Controller{
 
     public function get_category_courses($category){
         $courses = App\Category::where('name', $category)->get()->first()->courses()->get();
-        return view('courses.courses', ['courses' => $courses]);
+        return view('courses.courses', ['courses' => $courses, 'category' => $category]);
     }
 
     public function get_courses(){
         $courses = App\Course::all();
-        return view('courses.courses', ['courses' => $courses]);
+        return view('courses.courses', ['courses' => $courses, 'category' => '']);
     }
 
     /**
@@ -31,6 +31,10 @@ class CoursesController extends Controller{
             $courses = auth()->user()->my_courses()->get();
         }
         return view('courses.courses', ['courses', $courses]);
+    }
+
+    public function download($resource){
+        return Storage::download('public/content/resources/'.$resource);
     }
 
     /**
@@ -53,7 +57,19 @@ class CoursesController extends Controller{
             $user->my_courses()->attach($course);   
         }
         
-        return 'Enrolling';
+        return $this->view_course($slug);
+    }
+
+    public function unenroll($slug){
+        $user = auth()->user();
+        $course = App\Course::where('slug', $slug)->get();
+
+        //Add User to Enrolled Students
+        if ($user->type == 'Student'){
+            $user->my_courses()->detach($course);   
+        }
+        
+        return redirect('/');
     }
 
     /**
@@ -110,7 +126,7 @@ class CoursesController extends Controller{
         if ($request->hasfile('cover')){
             $cover = $request->file('cover');
             $cover_name = $course->slug.'_cover-'.$course->id.'.'.$cover->getClientOriginalExtension();
-            Storage::disk('content')->putFileAs('covers', $cover, $cover_name);
+            Storage::disk('public')->putFileAs('content/covers', $cover, $cover_name);
             App\Course::find($course->id)
                         ->update(['cover' => $cover_name]);
         }else return back()->with('error_msg', 'Cover Missing');
@@ -134,7 +150,7 @@ class CoursesController extends Controller{
             $chapter_res = $request->file('res_'.$chapters_count);
             if($chapter_res != null){
                 $res_name = $course->slug.'_chapter_'.$chapter->id.'.'.$chapter_res->getClientOriginalExtension();
-                Storage::disk('content')->putFileAs('resources', $chapter_res, $res_name);
+                Storage::disk('public')->putFileAs('content/resources', $chapter_res, $res_name);
                 App\Chapter::find($chapter->id)
                         ->update(['resource' => $res_name]);
             }
@@ -154,7 +170,7 @@ class CoursesController extends Controller{
                 if ($request->hasfile('res_'.$chapters_count.$subchapters_count)){
                     $subchapter_video = $request->file('res_'.$chapters_count.$subchapters_count);
                     $video_name = $course->slug.'_subchapter_'.$subchapter->id.'.'.$subchapter_video->getClientOriginalExtension();
-                    Storage::disk('content')->putFileAs('videos', $subchapter_video, $video_name);
+                    Storage::disk('public')->putFileAs('content/videos', $subchapter_video, $video_name);
                     App\SubChapter::find($subchapter->id)
                             ->update(['video' => $video_name]);
                 }else return back()->with('error_msg', 'Video Missing');

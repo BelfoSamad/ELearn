@@ -26,8 +26,7 @@
                 <div data-loader="circle-side"></div>
             </div><!-- /Preload -->
             <div id="logo">
-                <a href="index.html"><img src="{{asset('img/logo.png')}}" width="149" height="42" data-retina="true"
-                        alt=""></a>
+                <a href="/"><img src="{{asset('img/logo.png')}}" width="149" height="42" data-retina="true" alt=""></a>
             </div>
             <ul id="top_menu">
                 @auth
@@ -71,10 +70,24 @@
 
                     </div>
                     <div class="col-lg-3 col-md-6 ml-lg-auto">
-                        <h5>Useful links</h5>
+                        <h5>Categories</h5>
                         <ul class="links">
-                            <li><a href="#">Login</a></li>
-                            <li><a href="#">Register</a></li>
+                            <li><a href="Business/courses">Business</a></li>
+                            <li><a href="IT/courses">IT</a></li>
+                            <li><a href="Languages/courses">Languages</a></li>
+                            <li><a href="Math/courses">Math</a></li>
+                            <li><a href="Science/courses">Science</a></li>
+                            <li><a href="Software%20Development/courses">Software Development</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 col-md-6 ml-lg-auto">
+                        <h5>Useful Links</h5>
+                        <ul class="links">
+                            <li><a href="/login">Login</a></li>
+                            <li><a href="/register">Register</a></li>
+                            <li><a href="/profile">Profile</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Join Us</a></li>
                         </ul>
                     </div>
                 </div>
@@ -100,9 +113,12 @@
     <script src="{{asset('js/common_scripts.js')}}"></script>
     <script src="{{asset('js/main.js')}}"></script>
     <script src="{{asset('assets/validate.js')}}"></script>
+    <script src="{{asset('js/jquery.wizard.js')}}"></script>
+    <script src="{{asset('js/jquery.validate.js')}}"></script>
+    <script src="{{asset('js/admission_func.js')}}""></script>
 
     <!-- SPECIFIC SCRIPTS -->
-    <script src="{{asset('js/jquery.cookiebar.js')}}"></script>
+    <script src=" {{asset('js/jquery.cookiebar.js')}}"></script>
     <script src="{{asset('jquery-3.4.1.min.js')}}"></script>
     <script>
         var x = 1;
@@ -113,7 +129,7 @@
             chapter.setAttribute("class", "c_" + x);
             //Add Inputs
             chapter.innerHTML = "<div class=\"col-md-6\"><span class=\"input\">" +
-            "<input class=\"input_field\" placeholder=\"Chapter Title\" type=\"text\" name=\"c_title_"+x+"\" />" +
+            "<input class=\"input_field\" placeholder=\"Chapter Title\" type=\"text\" name=\"c_title_"+x+"\" required/>" +
             "<label class=\"input_label\"></label></span></div>" +
             "<input class=\"inputfile\" type=\"file\" name=\"res_"+x+"\" />";
             
@@ -155,9 +171,9 @@
 
             //Add Inputs
             subchapter.innerHTML = "<div class=\"col-md-6\"><span class=\"input\">" + 
-            "<input class=\"input_field\" placeholder=\"Subchapter Title\" type=\"text\" name=\"sc_title_"+c_id+sc_id+"\" />" +
+            "<input class=\"input_field\" placeholder=\"Subchapter Title\" type=\"text\" required name=\"sc_title_"+c_id+sc_id+"\" />" +
             "<label class=\"input_label\"></label></span></div>" + 
-            "<input class=\"inputfile\" type=\"file\" accept=\"video/*\" name=\"res_"+c_id+sc_id+"\" />";
+            "<input class=\"inputfile\" type=\"file\" accept=\"video/*\" required name=\"res_"+c_id+sc_id+"\" />";
             
             //Add Count
             $(this).attr("count", sc_id);
