@@ -13,8 +13,8 @@
 		<div class="row">
 			<aside class="col-lg-3" id="sidebar">
 				<div class="profile">
-					<figure><img src="http://via.placeholder.com/150x150/ccc/fff/teacher_2_small.jpg" alt="Teacher"
-							class="rounded-circle"></figure>
+					<figure><img src="{{ Storage::url('avatars/'.Auth::user()->avatar)}}" width="150px" height="128px"
+							alt="Teacher" class="rounded-circle"></figure>
 					<ul>
 						<li>Name <span class="float-right">{{Auth::user()->name}}</span></li>
 						<li>Email <span class="float-right">{{Auth::user()->email}}</span></li>

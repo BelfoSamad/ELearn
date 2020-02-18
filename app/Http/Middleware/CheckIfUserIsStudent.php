@@ -17,6 +17,6 @@ class CheckIfUserIsStudent
     {
         if($request->user()->type == "Student")
             return $next($request);
-        else return redirect('home');
+        else return redirect('/');
     }
 }

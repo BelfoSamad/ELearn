@@ -10,8 +10,8 @@ class SubChapter extends Model
         'video',
     ];
 
-    public function comments(){
-        return $this->hasMany('App\Comment');
+    public function questions(){
+        return $this->hasMany('App\Question');
     }
 
     public function chapter(){

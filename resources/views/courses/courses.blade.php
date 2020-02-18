@@ -81,8 +81,8 @@
 							<figure class="block-reveal">
 								<div class="block-horizzontal"></div>
 								<a href="/course/{{$course->slug}}"><img
-										src="http://via.placeholder.com/800x533/ccc/fff/course__list_1.jpg"
-										class="img-fluid" alt=""></a>
+										src="{{ Storage::url('content/covers/'.$course->cover)}}" class="img-fluid"
+										alt=""></a>
 								<div class="preview"><span>Preview course</span></div>
 							</figure>
 							<div class="wrapper">

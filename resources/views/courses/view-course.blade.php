@@ -84,8 +84,8 @@
 							<h5>Ask Question</h5>
 							<form>
 								<div class="form-group">
-									<textarea class="form-control" name="comments" id="comments2" rows="6"
-										placeholder="Comment"></textarea>
+									<textarea class="form-control" name="question" id="question" rows="2"
+										placeholder="Question"></textarea>
 								</div>
 								<div class="form-group">
 									<button type="submit" id="submit2" class="btn_1 rounded add_bottom_30">
@@ -94,10 +94,9 @@
 							</form>
 
 							<div id="comments">
-								<h5>Comments</h5>
+								<h5>Q/A</h5>
 								<ul>
-									@foreach ($comments as $comment)
-
+									@foreach ($questions as $question)
 									<li>
 										<div class="avatar">
 											<a href="#"><img
@@ -106,49 +105,46 @@
 										</div>
 										<div class="comment_right clearfix">
 											<div class="comment_info">
-												By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span>
+												By
+												Test<span>|</span>{{$question->created_at}}
 											</div>
-											<p>{{$comment->content}}</p>
+											<p>{{$question->question}}
+											</p>
 										</div>
+										<ul class="replied-to">
+											<h5>Answer</h5>
+											<form>
+												<div class="form-group">
+													<textarea class="form-control" name="answer" id="answer" rows="2"
+														placeholder="Answer"></textarea>
+												</div>
+												<div class="form-group">
+													<button type="submit" id="submit2"
+														class="btn_1 rounded add_bottom_30">
+														Submit</button>
+												</div>
+											</form>
+											@foreach ($question->answers()->get() as $answer)
+											<li>
+												<div class="avatar">
+													<a href="#"><img
+															src="http://via.placeholder.com/150x150/ccc/fff/avatar2.jpg"
+															alt="">
+													</a>
+												</div>
+												<div class="comment_right clearfix">
+													<div class="comment_info">
+														By Test<span>|</span>{{$answer->created_at}}
+													</div>
+													<p>
+														{{$answer->answer}}
+													</p>
+												</div>
+											</li>
+											@endforeach
+										</ul>
 									</li>
 									@endforeach
-									<li>
-										<div class="avatar">
-											<a href="#"><img
-													src="http://via.placeholder.com/150x150/ccc/fff/avatar1.jpg" alt="">
-											</a>
-										</div>
-										<div class="comment_right clearfix">
-											<div class="comment_info">
-												By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span>
-											</div>
-											<p>
-												Nam cursus tellus quis magna porta adipiscing. Donec et eros leo, non
-												pellentesque arcu. Curabitur vitae mi enim, at vestibulum magna. Cum
-												sociis
-												natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-												mus.
-												Sed sit amet sem a urna rutrumeger fringilla. Nam vel enim ipsum, et
-												congue
-												ante.
-											</p>
-										</div>
-									</li>
-									<li>
-										<div class="avatar">
-											<a href="#"><img
-													src="http://via.placeholder.com/150x150/ccc/fff/avatar3.jpg" alt="">
-											</a>
-										</div>
-										<div class="comment_right clearfix">
-											<div class="comment_info">
-												By <a href="#">Anna Smith</a><span>|</span>25/10/2019<span>|</span>
-											</div>
-											<p>
-												Cursus tellus quis magna porta adipiscin
-											</p>
-										</div>
-									</li>
 								</ul>
 							</div>
 						</div>

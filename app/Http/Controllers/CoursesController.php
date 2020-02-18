@@ -81,25 +81,37 @@ class CoursesController extends Controller{
         if ($subchapter_id != null){
             $subchapter = App\SubChapter::find($subchapter_id);
         }else {
-            $subchapter = $course->chapters()->get()->first()->sub_chapters()->get()->first();
+            $subchapter = $course->chapters()->first()->sub_chapters()->first();
         }
-        $comments = $subchapter->comments()->get();
+        $questions = $subchapter->questions()->get();
         return view('courses.view-course'
         ,['course' => $course,
             'subchapter' => $subchapter,
-            'constructor' => $constructor, 
-            'comments' => $comments]
+            'constructor' => $constructor,
+            'questions' => $questions]
         );
     }
 
     /**
-     * Add Comment
+     * Add Question
      */
-    public function add_comment($subchapter_id){
-        $comment = new App\Comment();
-        $comment->content = $request->input('comment');
-        $comment->sub_chapter_id = $subchapter_id;
-        $comment->save();
+    public function add_question($subchapter_id){
+        $question = new App\Question();
+        $question->question = $request->input('question');
+        $question->sub_chapter_id = $subchapter_id;
+        $question->user_id = auth()->id;
+        $question->save();
+    }
+
+    /**
+     * Add Answer
+     */
+    public function add_answer($question_id){
+        $answer = new App\Answer();
+        $answer->answer = $request->input('answer');
+        $answer->question_id = $question_id;
+        $answer->user_id = auth()->id;
+        $answer->save();
     }
 
     /**
