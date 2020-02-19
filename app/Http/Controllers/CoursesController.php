@@ -53,9 +53,7 @@ class CoursesController extends Controller{
         $course = App\Course::where('slug', $slug)->get();
 
         //Add User to Enrolled Students
-        if ($user->type == 'Student'){
-            $user->my_courses()->attach($course);   
-        }
+        $user->my_courses()->attach($course);
         
         return $this->view_course($slug);
     }
@@ -65,9 +63,7 @@ class CoursesController extends Controller{
         $course = App\Course::where('slug', $slug)->get();
 
         //Add User to Enrolled Students
-        if ($user->type == 'Student'){
-            $user->my_courses()->detach($course);   
-        }
+        $user->my_courses()->detach($course);
         
         return redirect('/');
     }
@@ -83,7 +79,7 @@ class CoursesController extends Controller{
         }else {
             $subchapter = $course->chapters()->first()->sub_chapters()->first();
         }
-        $questions = $subchapter->questions()->get();
+        $questions = $subchapter->questions()->get()->reverse();
         return view('courses.view-course'
         ,['course' => $course,
             'subchapter' => $subchapter,
@@ -93,25 +89,37 @@ class CoursesController extends Controller{
     }
 
     /**
+     * Get Subchapter
+     */
+    public function get_subchapter($slug, $subchapter_id){
+        $subchapter = App\SubChapter::where('id', $subchapter_id)->first();
+        $questions = $subchapter->questions()->get()->reverse();
+        return view('courses.forum.forum')->with('questions', $questions)->render();
+    }
+
+
+    /**
      * Add Question
      */
     public function add_question($subchapter_id){
         $question = new App\Question();
-        $question->question = $request->input('question');
+        $question->question = $_GET['question'];
         $question->sub_chapter_id = $subchapter_id;
-        $question->user_id = auth()->id;
+        $question->user_id = auth()->id();
         $question->save();
+        return view('courses.forum.question')->with('question', $question)->render();
     }
-
+    
     /**
      * Add Answer
      */
     public function add_answer($question_id){
         $answer = new App\Answer();
-        $answer->answer = $request->input('answer');
+        $answer->answer = $_GET['answer'];
         $answer->question_id = $question_id;
-        $answer->user_id = auth()->id;
+        $answer->user_id = auth()->id();
         $answer->save();
+        return view('courses.forum.answer')->with('answer', $answer)->render();
     }
 
     /**
@@ -132,6 +140,8 @@ class CoursesController extends Controller{
             $course->user_id = $request->user()->id;
             //Save Course
             $course->save();
+
+            $request->user()->my_courses()->attach($course);
         }else return back()->with('error_msg', 'Course Informations Missing');
 
         //Save Cover

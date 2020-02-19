@@ -14,6 +14,6 @@ class ProfileController extends Controller
         }else{
             $courses = auth()->user()->my_courses()->get();
         }
-        return view('profile', ['courses' => $courses]);
+        return view('auth.profile', ['courses' => $courses]);
     }
 }

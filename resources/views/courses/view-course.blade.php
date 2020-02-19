@@ -15,9 +15,8 @@
 	<link href="{{asset('css/vendors.css')}}" rel="stylesheet">
 	<link href="{{asset('css/blog.css')}}" rel="stylesheet">
 	<link href="{{asset('css/icon_fonts/css/all_icons.min.css')}}" rel="stylesheet">
-
-	<!-- YOUR CUSTOM CSS -->
 	<link href="{{asset('css/custom.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -46,8 +45,9 @@
 										</li>
 										@endif
 										@foreach ($chapter->sub_chapters()->get() as $subchapter)
-										<li class="get_video"
-											src="{{ Storage::url('content/videos/'.$subchapter->video)}}">
+										<li class="get_video" id="{{$subchapter->id}}"
+											src="{{ Storage::url('content/videos/'.$subchapter->video)}}"
+											href="/course/{{$course->slug}}/view&id={{$subchapter->id}}">
 											{{$subchapter->title}}</li>
 										@endforeach
 									</ul>
@@ -62,92 +62,73 @@
 				<video id="course_content" src="{{ Storage::url('content/videos/'.$subchapter->video)}}"
 					controls></video>
 				<div class="course-details">
-					<ul class="nav nav-tabs" id="myTab" role="tablist">
-						<li class="nav-item">
-							<a class="nav-link active" id="description-tab" data-toggle="tab" href="#description"
-								role="tab" aria-controls="description" aria-selected="true">Description</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" id="forum-tab" data-toggle="tab" href="#forum" role="tab"
-								aria-controls="forum" aria-selected="false">Forum</a>
-						</li>
-					</ul>
-					<div class="tab-content" id="myTabContent">
-						<div class="tab-pane fade show active" id="description" role="tabpanel"
-							aria-labelledby="description-tab">
-							<section id="description">
-								<h2>Description</h2>
-								<p>{{$course->description}}</p>
-							</section>
+					<h5>Ask Question</h5>
+					<form>
+						<div class="form-group">
+							<textarea class="form-control" name="question" id="question" rows="2"
+								placeholder="Question"></textarea>
 						</div>
-						<div class="tab-pane fade" id="forum" role="tabpanel" aria-labelledby="forum-tab">
-							<h5>Ask Question</h5>
-							<form>
-								<div class="form-group">
-									<textarea class="form-control" name="question" id="question" rows="2"
-										placeholder="Question"></textarea>
-								</div>
-								<div class="form-group">
-									<button type="submit" id="submit2" class="btn_1 rounded add_bottom_30">
-										Submit</button>
-								</div>
-							</form>
+						<div class="form-group">
+							<button type="button" href="/course/{{$subchapter->id}}/add_question" id="submit_question"
+								class="btn_1 rounded add_bottom_30">
+								Submit</button>
+						</div>
+					</form>
 
-							<div id="comments">
-								<h5>Q/A</h5>
-								<ul>
-									@foreach ($questions as $question)
+					<div id="comments">
+						<h5>Q/A</h5>
+						<ul class="questions">
+							@foreach ($questions as $question)
+							<li>
+								<div class="avatar">
+									<a href="#"><img src="{{ Storage::url('avatars/'.$question->author->avatar)}}"
+											alt="">
+									</a>
+								</div>
+								<div class="comment_right clearfix">
+									<div class="comment_info">
+										By
+										{{$question->author->name}}<span>|</span>{{$question->created_at->format('j F, Y')}}
+									</div>
+									<p>{{$question->question}}
+									</p>
+								</div>
+								<ul class="replied-to">
+									<h5>Answer</h5>
+									<form>
+										<div class="form-group">
+											<textarea class="form-control" name="answer" id="answer" rows="2"
+												placeholder="Answer"></textarea>
+										</div>
+										<div class="form-group">
+											<button type="button" id="submit_answer"
+												href="/course/{{$question->id}}/add_answer"
+												class="btn_1 rounded add_bottom_30">
+												Submit</button>
+										</div>
+									</form>
+									@foreach ($question->answers()->get() as $answer)
 									<li>
 										<div class="avatar">
-											<a href="#"><img
-													src="http://via.placeholder.com/150x150/ccc/fff/avatar1.jpg" alt="">
+											<a href="#"><img src="{{ Storage::url('avatars/'.$answer->author->avatar)}}"
+													alt="">
 											</a>
 										</div>
 										<div class="comment_right clearfix">
 											<div class="comment_info">
 												By
-												Test<span>|</span>{{$question->created_at}}
+												{{$answer->author->name}}<span>|</span>{{$answer->created_at->format('j F, Y')}}
 											</div>
-											<p>{{$question->question}}
+											<p>
+												{{$answer->answer}}
 											</p>
 										</div>
-										<ul class="replied-to">
-											<h5>Answer</h5>
-											<form>
-												<div class="form-group">
-													<textarea class="form-control" name="answer" id="answer" rows="2"
-														placeholder="Answer"></textarea>
-												</div>
-												<div class="form-group">
-													<button type="submit" id="submit2"
-														class="btn_1 rounded add_bottom_30">
-														Submit</button>
-												</div>
-											</form>
-											@foreach ($question->answers()->get() as $answer)
-											<li>
-												<div class="avatar">
-													<a href="#"><img
-															src="http://via.placeholder.com/150x150/ccc/fff/avatar2.jpg"
-															alt="">
-													</a>
-												</div>
-												<div class="comment_right clearfix">
-													<div class="comment_info">
-														By Test<span>|</span>{{$answer->created_at}}
-													</div>
-													<p>
-														{{$answer->answer}}
-													</p>
-												</div>
-											</li>
-											@endforeach
-										</ul>
 									</li>
 									@endforeach
 								</ul>
-							</div>
-						</div>
+							</li>
+							@endforeach
+						</ul>
 					</div>
 				</div>
 		</main>
@@ -156,17 +137,64 @@
 	<script src="{{asset('js/jquery-2.2.4.min.js')}}"></script>
 	<script src="{{asset('js/common_scripts.js')}}"></script>
 	<script src="{{asset('js/main.js')}}"></script>
-	<script src="{{asset('assets/validate.js')}}"></script>
+	<script src="{{asset('js/validate.js')}}"></script>
 
 	<!-- SPECIFIC SCRIPTS -->
-	<script src="{{asset('js/jquery.cookiebar.js')}}"></script>
 	<script src="{{asset('jquery-3.4.1.min.js')}}"></script>
 
 	<script>
 		$(".get_video").on("click", function(){
-			$(this).style = "color: yellow";
 			document.getElementById("course_content").src = $(this).attr("src");
+			console.log("/course/"+$(this).attr("id")+"/add_question");
+			$("#submit_question").attr("href", "/course/"+$(this).attr("id")+"/add_question");
+			var url = $(this).attr("href");
+			$.ajax({
+				type:'GET',
+				url: url,
+				dataType: "html",
+				success: function(response){
+					console.log(response);
+					$('#comments').empty().html(response);
+				}
+			});
         });
+
+		$("#submit_question").on("click", function(){
+			var question = $("#question").val();
+			$("#question").val("");
+			if (question != ""){
+			var url = $(this).attr("href");
+			$.ajax({
+				type:'GET',
+				url: url,
+				data:{
+					'question': question,
+				},
+				dataType: "html",
+				success: function(response){
+					$('.questions').prepend(response);
+				}
+			});
+			}
+		});
+
+		$("#submit_answer").on("click", function(){
+			var answer = $("#answer").val();
+			if (answer != ""){
+			var url = $(this).attr("href");
+			$.ajax({
+				type:'GET',
+				url: url,
+				data:{
+					'answer': answer,
+				},
+				dataType: "html",
+				success: function(response){
+					$('.replied-to').append(response);
+				}
+			});
+			}
+		});
 	</script>
 
 </body>

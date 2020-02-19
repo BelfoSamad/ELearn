@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 @section('courses')
 <main>
 	<section id="hero_in" class="courses">
@@ -31,7 +31,7 @@
 				<div class="row">
 					@foreach ($courses as $course)
 					@auth
-					@if (!$course->enrolled_students->contains(Auth::user()))
+					@if (!Auth::user()->my_courses->contains($course))
 					<div class="col-md-4">
 						<div class="box_grid wow">
 							<figure class="block-reveal">
@@ -69,7 +69,7 @@
 							<ul>
 								<li><i class="icon_clock_alt"></i>
 									{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
-								<li><a href="/course/{{$course->slug}}">Enrolled</a></li>
+								<li><a href="/course/{{$course->slug}}/view">View</a></li>
 							</ul>
 						</div>
 					</div>

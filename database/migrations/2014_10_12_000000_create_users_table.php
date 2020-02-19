@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('avatar')->default('default_avatar.png');
             $table->enum('type', ['Student', 'Teacher']);
+            $table->enum('gender', ['Male', 'Female']);
+            $table->date('birthdate');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

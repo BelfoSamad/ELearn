@@ -13,21 +13,31 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+
+//Q/A Routes
+Route::get('/course/{subchapter_id}/add_question', 'CoursesController@add_question');
+Route::get('/course/{question_id}/add_answer', 'CoursesController@add_answer');
+
 //Courses Routes
 Route::get('/{category}/courses', 'CoursesController@get_category_courses');
 Route::get('/courses', 'CoursesController@get_courses');
 Route::get('/my_courses', 'CoursesController@get_my_courses')->middleware('auth');
 
+//Add Course
 Route::get('/course/add', function(){
     return view('courses.add_course');
-})->middleware('auth', 'isTeacher');
+})->middleware('auth');
 Route::post('/course/add/new', 'CoursesController@add_course');
 
+//Get Single course
 Route::get('/course/{slug}', 'CoursesController@get_course');
 
-Route::get('/course/{slug}/enroll', 'CoursesController@enroll')->middleware('auth', 'isStudent');
-Route::get('/course/{slug}/unenroll', 'CoursesController@unenroll')->middleware('auth', 'isStudent');
+//Enroll/UnEnroll
+Route::get('/course/{slug}/enroll', 'CoursesController@enroll')->middleware('auth');
+Route::get('/course/{slug}/unenroll', 'CoursesController@unenroll')->middleware('auth');
 
+//View Course
+Route::get('/course/{slug}/view&id={subchapter_id}', 'CoursesController@get_subchapter');
 Route::get('/course/{slug}/view/{subchapter_id?}', 'CoursesController@view_course')->middleware('auth');
 Route::get('/download/{resource}', 'CoursesController@download');
 
@@ -35,9 +45,6 @@ Route::get('/download/{resource}', 'CoursesController@download');
 Route::get('/profile', 'ProfileController@profile')->middleware('auth');
 
 //Auth
-Route::get('/reg', function () {
-    return view('register');
-});
 Route::get('/logout', 'Auth\LoginController@logout', function () {
     return abort(404);
 });

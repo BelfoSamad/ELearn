@@ -1,3 +1,53 @@
-/*============================================================================================*/
-/* Your custom styles below */
-/*============================================================================================*/
+/* -- View Course Page -- */
+aside {
+    height: 100%;
+    width: 33%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.course-content {
+    height: 100%;
+    width: 66%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow-x: hidden;
+}
+
+video {
+    height: 512px;
+}
+
+.course-content .course-details {
+    margin-top: 512px;
+}
+
+/* -- Add Course Page -- */
+.add_chapter {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.add_sub_chapter {
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.add_course {
+    position: absolute;
+    right: 0;
+}
+
+div[class^="subchapters"] {
+    margin-left: 64px;
+}
+
+.chapters {
+    margin-left: 64px;
+}

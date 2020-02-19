@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 @section('add-course')
 <main>
     <section id="hero_in" class="courses">

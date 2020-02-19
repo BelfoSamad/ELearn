@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 @section('home')
 <main>
 	<section class="hero_single">
@@ -19,7 +19,7 @@
 		<div id="reccomended" class="owl-carousel owl-theme">
 			@foreach ($courses as $course)
 			@auth
-			@if (!$course->enrolled_students->contains(Auth::user()))
+			@if (!Auth::user()->my_courses->contains($course))
 			<div class="item">
 				<div class="box_grid">
 					<figure>
@@ -55,7 +55,7 @@
 					<ul>
 						<li><i class="icon_clock_alt"></i>
 							{{floor($course->duration / 60).'h:'.($course->duration % 60).'m'}}</li>
-						<li><a href="/course/{{$course->slug}}">Enrolled</a></li>
+						<li><a href="/course/{{$course->slug}}/view">View</a></li>
 					</ul>
 				</div>
 			</div>

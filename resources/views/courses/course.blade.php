@@ -1,4 +1,4 @@
-@extends('base')
+@extends('layouts.base')
 @section('course')
 <main>
 	<section id="hero_in" class="courses">
@@ -72,7 +72,7 @@
 				<aside class="col-lg-4" id="sidebar">
 					<div class="box_detail">
 						@auth
-						@if (auth()->user()->my_courses->contains($course))
+						@if (Auth::user()->my_courses->contains($course))
 						<a href="/course/{{$course->slug}}/view" class="btn_1 full-width">View</a>
 						<a href="/course/{{$course->slug}}/unenroll" class="btn_1 full-width">UnEnroll</a>
 						@else
