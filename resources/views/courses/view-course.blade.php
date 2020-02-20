@@ -48,7 +48,8 @@
 										<li class="get_video" id="{{$subchapter->id}}"
 											src="{{ Storage::url('content/videos/'.$subchapter->video)}}"
 											href="/course/{{$course->slug}}/view&id={{$subchapter->id}}">
-											{{$subchapter->title}}</li>
+											<a href="javascript:;">{{$subchapter->title}}</a>
+										</li>
 										@endforeach
 									</ul>
 								</div>
@@ -143,9 +144,11 @@
 	<script src="{{asset('jquery-3.4.1.min.js')}}"></script>
 
 	<script>
+		window.onload = function(){
+			$("#submit_question").attr("href", "/course/"+$(".get_video").attr("id")+"/add_question");
+		}
 		$(".get_video").on("click", function(){
 			document.getElementById("course_content").src = $(this).attr("src");
-			console.log("/course/"+$(this).attr("id")+"/add_question");
 			$("#submit_question").attr("href", "/course/"+$(this).attr("id")+"/add_question");
 			var url = $(this).attr("href");
 			$.ajax({

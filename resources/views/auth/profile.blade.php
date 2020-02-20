@@ -15,7 +15,7 @@
 				<div class="profile">
 					<figure><img src="{{ Storage::url('avatars/'.Auth::user()->avatar)}}" width="150px" height="128px"
 							alt="Teacher" class="rounded-circle"></figure>
-					<a href="">set Avatar</a>
+					<!-- <a href="">set Avatar</a> -->
 					<ul>
 						<li>Name <span class="float-right">{{Auth::user()->name}}</span></li>
 						<li>Email <span class="float-right">{{Auth::user()->email}}</span></li>

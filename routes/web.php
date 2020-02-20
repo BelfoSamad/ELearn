@@ -33,12 +33,12 @@ Route::post('/course/add/new', 'CoursesController@add_course');
 Route::get('/course/{slug}', 'CoursesController@get_course');
 
 //Enroll/UnEnroll
-Route::get('/course/{slug}/enroll', 'CoursesController@enroll')->middleware('auth');
-Route::get('/course/{slug}/unenroll', 'CoursesController@unenroll')->middleware('auth');
+Route::get('/course/{slug}/enroll', 'CoursesController@enroll')->middleware('auth', 'isNotEnrolled');
+Route::get('/course/{slug}/unenroll', 'CoursesController@unenroll')->middleware('auth', 'isEnrolled');
 
 //View Course
 Route::get('/course/{slug}/view&id={subchapter_id}', 'CoursesController@get_subchapter');
-Route::get('/course/{slug}/view/{subchapter_id?}', 'CoursesController@view_course')->middleware('auth');
+Route::get('/course/{slug}/view/{subchapter_id?}', 'CoursesController@view_course')->middleware('auth', 'isEnrolled');
 Route::get('/download/{resource}', 'CoursesController@download');
 
 //Profile Routes
