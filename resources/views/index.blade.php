@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('home')
 <main>
-	<section class="hero_single">
+	<section class="hype_section">
 		<div class="wrapper">
 			<div class="container">
 				<h3><strong>Get the BEST Courses</strong><br>on ELearn</h3>
@@ -9,19 +9,18 @@
 			<a href="#first_section" class="btn_explore hidden_tablet"><i class="ti-arrow-down"></i></a>
 		</div>
 	</section>
-	<!-- /hero_single -->
 
 	<div class="container-fluid margin_120_0" id="first_section">
-		<div class="main_title_2">
+		<div class="section_title">
 			<span><em></em></span>
 			<h2>Popular Courses</h2>
 		</div>
-		<div id="reccomended" class="owl-carousel owl-theme">
+		<div id="recommended" class="owl-carousel owl-theme">
 			@foreach ($courses as $course)
 			@auth
 			@if (!Auth::user()->my_courses->contains($course))
 			<div class="item">
-				<div class="box_grid">
+				<div class="course_grid">
 					<figure>
 						<a href="/course/{{$course->slug}}">
 							<div class="preview"><span>Preview course</span></div><img
@@ -41,7 +40,7 @@
 			</div>
 			@else
 			<div class="item">
-				<div class="box_grid">
+				<div class="course_grid">
 					<figure>
 						<a href="/course/{{$course->slug}}">
 							<div class="preview"><span>Preview course</span></div><img
@@ -63,7 +62,7 @@
 			@endauth
 			@guest
 			<div class="item">
-				<div class="box_grid">
+				<div class="course_grid">
 					<figure>
 						<a href="/course/{{$course->slug}}">
 							<div class="preview"><span>Preview course</span></div><img
@@ -84,7 +83,6 @@
 			@endguest
 			@endforeach
 		</div>
-		<!-- /carousel -->
 		<div class="container">
 			<p class="btn_home_align"><a href="/courses" class="btn_1 rounded">View all courses</a></p>
 		</div>
@@ -94,14 +92,14 @@
 	<!-- /container -->
 
 	<div class="container margin_30_95">
-		<div class="main_title_2">
+		<div class="section_title">
 			<span><em></em></span>
 			<h2>Categories</h2>
 		</div>
 		<div class="row">
 			@foreach ($categories as $category)
 			<div class="col-lg-4 col-md-6 wow" data-wow-offset="150">
-				<a href="/{{$category->name}}/courses" class="grid_item">
+				<a href="/{{$category->name}}/courses" class="category">
 					<figure class="block-reveal">
 						<div class="block-horizzontal"></div>
 						<img src="{{asset('img/category-covers/')}}/{{$category->cover}}" class="img-fluid" alt=""

@@ -1,14 +1,14 @@
 @extends('layouts.base')
 @section('profile')
 <main>
-	<section id="hero_in" class="general">
+	<section id="page_name" class="general">
 		<div class="wrapper">
 			<div class="container">
 				<h1 class="fadeInUp"><span></span>Profile</h1>
 			</div>
 		</div>
 	</section>
-	<!--/hero_in-->
+
 	<div class="container margin_60_35">
 		<div class="row">
 			<aside class="col-lg-3" id="sidebar">
@@ -32,11 +32,11 @@
 
 			<div class="col-lg-9">
 				<div class="box_teacher">
-					<div class="indent_title_in">
+					<div class="my_courses_title">
 						<i class="pe-7s-display1"></i>
 						<h3>My courses</h3>
 					</div>
-					<div class="wrapper_indent">
+					<div class="wrapper_my_courses">
 						<table class="table table-responsive table-striped add_bottom_30">
 							<thead>
 								<tr>
@@ -54,7 +54,6 @@
 							</tbody>
 						</table>
 					</div>
-					<!--wrapper_indent -->
 				</div>
 			</div>
 			<!-- /col -->

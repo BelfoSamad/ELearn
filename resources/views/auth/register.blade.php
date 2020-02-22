@@ -38,7 +38,7 @@
 							class="input_field form-control @error('name') is-invalid @enderror" name="name"
 							value="{{ old('name') }}" required autocomplete="name" autofocus>
 						<label class="input_label">
-							<span class="input__label-content">Your Name</span>
+							<span class="">Your Name</span>
 						</label>
 					</span>
 
@@ -47,7 +47,7 @@
 							class="input_field form-control @error('birthdate') is-invalid @enderror" name="birthdate"
 							value="{{ old('birthdate') }}" required autocomplete="birthdate">
 						<label class="input_label">
-							<span class="input__label-content">Your Birthdate</span>
+							<span class="">Your Birthdate</span>
 						</label>
 					</span>
 
@@ -56,7 +56,7 @@
 							class="input_field form-control @error('email') is-invalid @enderror" name="email"
 							value="{{ old('email') }}" required autocomplete="email">
 						<label class="input_label">
-							<span class="input__label-content">Your Email</span>
+							<span class="">Your Email</span>
 						</label>
 					</span>
 
@@ -67,7 +67,7 @@
 							<option value="Female">Female</option>
 						</select>
 						<label class="input_label">
-							<span class="input__label-content">Gender</span>
+							<span class="">Gender</span>
 						</label>
 					</span>
 
@@ -78,7 +78,7 @@
 							<option value="Teacher">Teacher</option>
 						</select>
 						<label class="input_label">
-							<span class="input__label-content">Account Type</span>
+							<span class="">Account Type</span>
 						</label>
 					</span>
 
@@ -87,7 +87,7 @@
 							class="input_field form-control @error('password') is-invalid @enderror" name="password"
 							required autocomplete="new-password">
 						<label class="input_label">
-							<span class="input__label-content">Your password</span>
+							<span class="">Your password</span>
 						</label>
 					</span>
 
@@ -95,7 +95,7 @@
 						<input id="password-confirm" type="password" class="input_field form-control"
 							name="password_confirmation" required autocomplete="new-password">
 						<label class="input_label">
-							<span class="input__label-content">Confirm password</span>
+							<span class="">Confirm password</span>
 						</label>
 					</span>
 
@@ -107,7 +107,6 @@
 				<div class="text-center add_top_10">Already have an acccount? <strong><a href="/login">Sign
 							In</a></strong></div>
 			</form>
-			<div class="copy">© 2020 ELearn</div>
 		</aside>
 	</div>
 	<!-- /login -->

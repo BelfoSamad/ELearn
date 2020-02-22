@@ -3,11 +3,8 @@
     "use strict";
 
     $(window).on('load', function () {
-        $('[data-loader="circle-side"]').fadeOut(); // will first fade out the loading animation
-        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-        $('body').delay(350);
-        $('#hero_in h1,#hero_in form').addClass('animated');
-        $('.hero_single, #hero_in').addClass('start_bg_zoom');
+        $('#page_name h1,#page_name form').addClass('animated');
+        $('.hype_section, #page_name').addClass('start_bg_zoom');
         $(window).scroll();
     });
 
@@ -23,47 +20,6 @@
     // Sticky sidebar
     $('#sidebar').theiaStickySidebar({
         additionalMarginTop: 150
-    });
-
-    // Mobile Mmenu
-    var $menu = $("nav#menu").mmenu({
-        "extensions": ["pagedim-black"],
-        counters: false,
-        keyboardNavigation: {
-            enable: true,
-            enhance: true
-        },
-        navbar: {
-            title: 'MENU'
-        },
-        navbars: [{
-            position: 'bottom',
-            content: ['<a href="#0">© 2017 Udema</a>']
-        }]
-    }, {
-        // configuration
-        clone: true,
-        classNames: {
-            fixedElements: {
-                fixed: "menu_2",
-                sticky: "sticky"
-            }
-        }
-    });
-    var $icon = $("#hamburger");
-    var API = $menu.data("mmenu");
-    $icon.on("click", function () {
-        API.open();
-    });
-    API.bind("open:finish", function () {
-        setTimeout(function () {
-            $icon.addClass("is-active");
-        }, 100);
-    });
-    API.bind("close:finish", function () {
-        setTimeout(function () {
-            $icon.removeClass("is-active");
-        }, 100);
     });
 
     // Header button explore
@@ -92,35 +48,6 @@
         scrollContainer: null // optional scroll container selector, otherwise use window
     });
     wow.init();
-
-    /*  video popups */
-    $('.video').magnificPopup({
-        type: 'iframe'
-    }); /* video modal*/
-
-    /*  Image popups */
-    $('.magnific-gallery').each(function () {
-        $(this).magnificPopup({
-            delegate: 'a',
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            removalDelay: 500, //delay removal by X to allow out-animation
-            callbacks: {
-                beforeOpen: function () {
-                    // just a hack that adds mfp-anim class to markup 
-                    this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-                    this.st.mainClass = this.st.el.attr('data-effect');
-                }
-            },
-            closeOnContentClick: true,
-            midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-        });
-    });
-
-    // tooltips
-    $('[data-toggle="tooltip"]').tooltip();
 
     // Accordion
     function toggleChevron(e) {
@@ -192,27 +119,7 @@
         radioClass: 'iradio_square-grey'
     });
 
-    // Carousels
-    $('#carousel').owlCarousel({
-        center: true,
-        items: 2,
-        loop: true,
-        margin: 10,
-        responsive: {
-            0: {
-                items: 1,
-                dots: false
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 4
-            }
-        }
-    });
-
-    $('#reccomended').owlCarousel({
+    $('#recommended').owlCarousel({
         center: true,
         items: 2,
         loop: true,
@@ -233,22 +140,8 @@
         }
     });
 
-    // Sticky filters
-    $(window).bind('load resize', function () {
-        var width = $(window).width();
-        if (width <= 991) {
-            $('.sticky_horizontal').stick_in_parent({
-                offset_top: 50
-            });
-        } else {
-            $('.sticky_horizontal').stick_in_parent({
-                offset_top: 73
-            });
-        }
-    });
-
     // Secondary nav scroll
-    var $sticky_nav = $('.secondary_nav');
+    var $sticky_nav = $('.course_page_nav');
     $sticky_nav.find('a').on('click', function (e) {
         e.preventDefault();
         var target = this.hash;
@@ -259,25 +152,6 @@
     });
     $sticky_nav.find('ul li a').on('click', function () {
         $sticky_nav.find('ul li a.active').removeClass('active');
-        $(this).addClass('active');
-    });
-
-    // Faq section (updated v1.2)
-    $('#faq_box a[href^="#"]').on('click', function () {
-        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') ||
-            location.hostname == this.hostname) {
-            var target = $(this.hash);
-            target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-            if (target.length) {
-                $('html,body').animate({
-                    scrollTop: target.offset().top - 185
-                }, 800);
-                return false;
-            }
-        }
-    });
-    $('ul#cat_nav li a').on('click', function () {
-        $('ul#cat_nav li a.active').removeClass('active');
         $(this).addClass('active');
     });
 

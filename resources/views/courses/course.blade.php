@@ -1,17 +1,16 @@
 @extends('layouts.base')
 @section('course')
 <main>
-	<section id="hero_in" class="courses">
+	<section id="page_name" class="general">
 		<div class="wrapper">
 			<div class="container">
 				<h1 class="fadeInUp"><span></span>{{$course->title}}</h1>
 			</div>
 		</div>
 	</section>
-	<!--/hero_in-->
 
 	<div class="bg_color_1">
-		<nav class="secondary_nav sticky_horizontal">
+		<nav class="course_page_nav sticky_horizontal">
 			<div class="container">
 				<ul class="clearfix">
 					<li><a href="#description" class="active">Description</a></li>
@@ -27,10 +26,8 @@
 						<p>{{$course->description}}</p>
 						<!-- /row -->
 					</section>
-					<!-- /section -->
-
 					<section id="chapters">
-						<div class="intro_title">
+						<div class="chapter_infos">
 							<h2>Chapters</h2>
 							<ul>
 								<li>{{$course->chapters()->count()}} Chapters</li>
@@ -51,7 +48,7 @@
 								<div id="collapse{{$chapter->id}}" class="collapse" role="tabpanel"
 									aria-labelledby="heading{{$chapter->id}}" data-parent="#accordion_lessons">
 									<div class="card-body">
-										<div class="list_lessons">
+										<div class="chapters_list">
 											<ul>
 												@foreach ($chapter->sub_chapters()->get() as $subchapter)
 												<li>{{$subchapter->title}}</li>
@@ -70,7 +67,7 @@
 				<!-- /col -->
 
 				<aside class="col-lg-4" id="sidebar">
-					<div class="box_detail">
+					<div class="actions">
 						@auth
 						@if (Auth::user()->my_courses->contains($course))
 						<a href="/course/{{$course->slug}}/view" class="btn_1 full-width">View</a>

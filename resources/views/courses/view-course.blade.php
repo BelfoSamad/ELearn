@@ -13,7 +13,6 @@
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('css/style.css')}}" rel="stylesheet">
 	<link href="{{asset('css/vendors.css')}}" rel="stylesheet">
-	<link href="{{asset('css/blog.css')}}" rel="stylesheet">
 	<link href="{{asset('css/icon_fonts/css/all_icons.min.css')}}" rel="stylesheet">
 	<link href="{{asset('css/custom.css')}}" rel="stylesheet">
 
@@ -77,7 +76,6 @@
 					</form>
 
 					<div id="comments">
-						<h5>Q/A</h5>
 						<ul class="questions">
 							@foreach ($questions as $question)
 							<li>

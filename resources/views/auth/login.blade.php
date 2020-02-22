@@ -19,12 +19,6 @@
 </head>
 
 <body id="login_bg">
-
-	<nav id="menu" class="fake_menu"></nav>
-
-	<div id="preloader">
-		<div data-loader="circle-side"></div>
-	</div>
 	<!-- End Preload -->
 
 	<div id="login">
@@ -37,7 +31,7 @@
 							class="input_field form-control @error('email') is-invalid @enderror" name="email"
 							value="{{ old('email') }}" required autocomplete="email" autofocus>
 						<label class="input_label">
-							<span class="input__label-content">Your email</span>
+							<span class="">Your email</span>
 						</label>
 					</span>
 
@@ -46,17 +40,16 @@
 							class="input_field form-control @error('password') is-invalid @enderror" name="password"
 							required autocomplete="current-password">
 						<label class="input_label">
-							<span class="input__label-content">Your password</span>
+							<span class="">Your password</span>
 						</label>
 					</span>
 				</div>
 				<button type="submit" class="btn btn-primary">
 					{{ __('Login') }}
 				</button>
-				<div class="text-center add_top_10">New to ELearn? <strong><a href="register.html">Sign up!</a></strong>
+				<div class="text-center add_top_10">New to ELearn? <strong><a href="/register">Sign up!</a></strong>
 				</div>
 			</form>
-			<div class="copy">© 2020 ELearn</div>
 		</aside>
 	</div>
 	<!-- /login -->

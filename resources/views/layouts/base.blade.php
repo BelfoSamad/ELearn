@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Udema a modern educational site template">
-    <meta name="author" content="Ansonika">
+    <meta name="description" content="Elearn, WEB mini Project">
+    <meta name="author" content="Belfodil Abdessamed">
     <title>ELearn</title>
 
     <!-- BASE CSS -->
@@ -20,9 +20,6 @@
 <body>
     <div id="page">
         <header class="header menu_2">
-            <div id="preloader">
-                <div data-loader="circle-side"></div>
-            </div><!-- /Preload -->
             <div id="logo">
                 <a href="/"><img src="{{asset('img/logo.png')}}" width="149" height="42" data-retina="true" alt=""></a>
             </div>
@@ -37,13 +34,6 @@
                 @endguest
             </ul>
             <!-- /top_menu -->
-            <a href="#menu" class="btn_mobile">
-                <div class="hamburger hamburger--spin" id="hamburger">
-                    <div class="hamburger-box">
-                        <div class="hamburger-inner"></div>
-                    </div>
-                </div>
-            </a>
             <nav id="menu" class="main-menu">
                 <ul>
                     <li><span><a href="/">Home</a></span></li>
@@ -124,9 +114,11 @@
             var chapter = document.createElement("div");
             chapter.setAttribute("class", "c_" + x);
             //Add Inputs
-            chapter.innerHTML = "<div class=\"col-md-6\"><span class=\"input\">" +
+            chapter.innerHTML = "<div class=\"form-group\"><span class=\"input\">" +
             "<input class=\"input_field\" placeholder=\"Chapter Title\" type=\"text\" name=\"c_title_"+x+"\" required/>" +
             "<label class=\"input_label\"></label></span></div>" +
+            "<div class=\"upload-btn-wrapper\">" +
+            "<button class=\"btn_upload\">Upload Resource</button>" + 
             "<input class=\"inputfile\" type=\"file\" name=\"res_"+x+"\" />";
             
             //Create the Subchapters Fieldset
@@ -166,10 +158,12 @@
             subchapter.setAttribute("class", class_sc);
 
             //Add Inputs
-            subchapter.innerHTML = "<div class=\"col-md-6\"><span class=\"input\">" + 
+            subchapter.innerHTML = "<div class=\"form-group\"><span class=\"input\">" + 
             "<input class=\"input_field\" placeholder=\"Subchapter Title\" type=\"text\" required name=\"sc_title_"+c_id+sc_id+"\" />" +
-            "<label class=\"input_label\"></label></span></div>" + 
-            "<input class=\"inputfile\" type=\"file\" accept=\"video/*\" required name=\"res_"+c_id+sc_id+"\" />";
+            "<label class=\"input_label\"></label></span></div>" +
+            "<div class=\"upload-btn-wrapper\">" +
+            "<button class=\"btn_upload\">Upload Video</button>" + 
+            "<input  type=\"file\" id=\"file\" accept=\"video/*\" required name=\"res_"+c_id+sc_id+"\" />";
             
             //Add Count
             $(this).attr("count", sc_id);

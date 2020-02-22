@@ -1,7 +1,7 @@
 @extends('layouts.base')
 @section('courses')
 <main>
-	<section id="hero_in" class="courses">
+	<section id="page_name" class="general">
 		<div class="wrapper">
 			<div class="container">
 				@if ($category != null)
@@ -12,19 +12,7 @@
 			</div>
 		</div>
 	</section>
-	<!--/hero_in-->
-	<div class="filters_listing sticky_horizontal">
-		<div class="container">
-			<ul class="clearfix">
-				<li>
-				</li>
-				<li>
-				</li>
-			</ul>
-		</div>
-		<!-- /container -->
-	</div>
-	<!-- /filters -->
+
 	<div class="container margin_60_35">
 		<div class="row">
 			<div class="col-lg-12">
@@ -33,7 +21,7 @@
 					@auth
 					@if (!Auth::user()->my_courses->contains($course))
 					<div class="col-md-4">
-						<div class="box_grid wow">
+						<div class="course_grid wow">
 							<figure class="block-reveal">
 								<div class="block-horizzontal"></div>
 								<a href="/course/{{$course->slug}}"><img
@@ -54,7 +42,7 @@
 					</div>
 					@else
 					<div class="col-md-4">
-						<div class="box_grid wow">
+						<div class="course_grid wow">
 							<figure class="block-reveal">
 								<div class="block-horizzontal"></div>
 								<a href="/course/{{$course->slug}}"><img
@@ -77,7 +65,7 @@
 					@endauth
 					@guest
 					<div class="col-md-4">
-						<div class="box_grid wow">
+						<div class="course_grid wow">
 							<figure class="block-reveal">
 								<div class="block-horizzontal"></div>
 								<a href="/course/{{$course->slug}}"><img

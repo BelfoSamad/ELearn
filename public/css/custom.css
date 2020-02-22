@@ -20,15 +20,90 @@ aside {
     overflow-x: hidden;
 }
 
-video {
-    height: 512px;
-}
-
 .course-content .course-details {
     margin-top: 512px;
+    padding: 32px;
+}
+
+.course-content .course-details h5 {
+    margin-bottom: 32px;
+    margin-top: 32px;
+}
+
+#comments {
+    padding: 10px 0 0px 0;
+    margin-bottom: 30px;
+}
+
+#comments ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#comments ul li {
+    list-style: none;
+    margin-bottom: 16px;
+}
+
+#comments .replied-to {
+    margin-left: 35px;
+}
+
+.avatar {
+    float: left;
+    margin-right: 25px;
+    width: 68px;
+    height: 68px;
+    overflow: hidden;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    position: relative;
+}
+
+.avatar img {
+    width: 68px;
+    height: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.comment_right {
+    display: table;
+    border: 2px solid #ededed;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    background: #FFF;
+    border-radius: 3px;
+    padding: 20px 20px 0 20px;
+    position: relative;
+}
+
+.comment_info {
+    padding-bottom: 7px;
+}
+
+.comment_info span {
+    padding: 0 10px;
 }
 
 /* -- Add Course Page -- */
+.add-container {
+    margin: auto;
+    background: #FFFFFF;
+    padding: 96px;
+    border-radius: 16px;
+}
+
 .add_chapter {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -41,7 +116,7 @@ video {
 
 .add_course {
     position: absolute;
-    right: 0;
+    right: 96px;
 }
 
 div[class^="subchapters"] {
