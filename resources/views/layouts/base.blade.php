@@ -21,7 +21,7 @@
     <div id="page">
         <header class="header menu_2">
             <div id="logo">
-                <a href="/"><img src="{{asset('img/logo.png')}}" width="149" height="42" data-retina="true" alt=""></a>
+                <a class="logo" href="/"><strong>ELEARN</strong></a>
             </div>
             <ul id="top_menu">
                 @auth
@@ -50,7 +50,7 @@
             <div class="container margin_120_95">
                 <div class="row">
                     <div class="col-lg-5 col-md-12 p-r-5">
-                        <p><img src="img/logo.png" width="149" height="42" data-retina="true" alt=""></p>
+                        <p><a class="logo" href="/"><strong>ELEARN</strong></a></p><br>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                             Quisque placerat dui eget lacus pulvinar, sed aliquam nisi tristique.
                             Vestibulum ornare nisi diam, eu aliquet nulla porttitor nec. In molestie, lacus quis

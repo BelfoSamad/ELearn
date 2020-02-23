@@ -348,6 +348,12 @@ ul#top_menu li a.btn_1:hover {
     float: left;
 }
 
+a.logo {
+    float: left;
+    color: #FFF;
+    font-size: 30px;
+}
+
 /*-------- Main --------*/
 #page_name {
     width: 100%;

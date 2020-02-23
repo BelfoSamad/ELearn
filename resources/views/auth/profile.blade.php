@@ -19,6 +19,7 @@
 					<ul>
 						<li>Name <span class="float-right">{{Auth::user()->name}}</span></li>
 						<li>Email <span class="float-right">{{Auth::user()->email}}</span></li>
+						<li>Type <span class="float-right">{{Auth::user()->type}}</span></li>
 						<li>Gender <span class="float-right">{{Auth::user()->gender}}</span></li>
 						<li>Birthdate <span class="float-right">{{Auth::user()->birthdate}}</span></li>
 						<li>My Courses <span class="float-right">{{$courses->count()}}</span></li>
